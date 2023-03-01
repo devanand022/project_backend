@@ -1,13 +1,8 @@
-const express =  require('express');
-const connectDatabase = require('./database');
+const express =  require('express')
 const app = express();
+const participates = require('./routes/participates');
 
 app.use(express.json());
+app.use('/api/', participates);
 
-const port = 7000;
-
-connectDatabase();
-
-app.listen(port, () => {
-    console.log(`server is running ${port}`);
-})
+module.exports = app;
