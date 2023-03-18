@@ -110,13 +110,13 @@ exports.verifyCollege = (req, res) => {
     dataBaseConnection.query(verifyCollege, [id], (error, result) => {
         if(error){
             res.status(500).json({
-                succes: false,
+                success: false,
                 error: error
             })
             return
         }
         res.status(201).json({
-            succes: true,
+            success: true,
             message: "Successfully updated"
         })
     })
@@ -127,7 +127,7 @@ exports.unVerifyCollege = (req, res) => {
     const unVerifyCollege = "UPDATE college SET status ='unverified' WHERE lot_no = ?";
     dataBaseConnection.query(unVerifyCollege, [id], (error, result) => {
         res.status(201).json({
-            succes: true,
+            success: true,
             message: "Successfully updated"
         })
     })
@@ -138,7 +138,7 @@ exports.verifyParticipate = (req, res) => {
     const verifyParticipate = "UPDATE participates SET status='verified' WHERE lot_no = ?";
     dataBaseConnection.query(verifyParticipate, [id], (error, result) => {
         res.status(201).json({
-            succes: true,
+            success: true,
             message: "Successfully updated"
         })
     })
@@ -149,9 +149,41 @@ exports.unVerifyParticipate = (req, res) => {
     const unVerifyParticipate = "UPDATE participates SET status='unverified' WHERE lot_no = ?";
     dataBaseConnection.query(unVerifyParticipate, [id], (error, result) => {
         res.status(201).json({
-            succes: true,
+            success: true,
             message: "Successfully updated"
         })
     })
 }
 
+exports.delCol = (req, res) => {
+    const id = req.params.id;
+    const deleteCol = "DELETE FROM college WHERE lot_no = ?";
+    dataBaseConnection.query(deleteCol, [id], (error, result) => {
+        res.status(201).json({
+            success: true,
+            message: "Successfully Deleted"
+        })
+    })
+}
+
+exports.delParticipate = (req, res) => {
+    const id = req.params.id;
+    const deleteParticipate = "DELETE FROM participates WHERE lot_no = ?";
+    dataBaseConnection.query(deleteParticipate, [id], (error, result) => {
+        res.status(201).json({
+            success: true,
+            message: "Successfully Deleted"
+        })
+    })
+}
+
+exports.delSingleParticipate = (req, res) => {
+    const id = req.params.id;
+    const deleteSingleParticipate = "DELETE FROM participates WHERE id = ?";
+    dataBaseConnection.query(deleteSingleParticipate, [id], (error, result) => {
+        res.status(201).json({
+            success: true,
+            message: "Successfully Deleted"
+        })
+    })
+}
