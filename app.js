@@ -2,7 +2,8 @@ const express =  require('express')
 const app = express();
 const body_parser = require('body-parser');
 const cors = require('cors');
-const dataBaseConnection = require('./database');
+const reg = require('./routers/reg');
+const admin = require('./routers/admin');
 
 app.use(cors());
 app.use(express.json());
@@ -13,3 +14,5 @@ app.listen(5000, () => {
 })
 
 
+app.use('/api/', reg);
+app.use('/api/', admin);

@@ -4,6 +4,6 @@ const dataBaseConnection = mysql.createPool({
     host : "localhost",
     user : "root",
     password : "Kingkd022@2212",
-    database : "test"
+    database : "event_management"
 })
  module.exports = dataBaseConnection;
