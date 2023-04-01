@@ -1,5 +1,5 @@
 const express = require('express');
-const { createCollege, createParticipates, viewColleges, viewParticipates, viewVerifiedColleges, viewUnVerifiedColleges, singleCollege, singleParticipate, editParticipate, verifyCollege, unVerifyCollege, verifyParticipate, unVerifyParticipate, delCol, delParticipate, delSingleParticipate } = require('../controllers/regControllers');
+const { createCollege, createParticipates, viewColleges, viewParticipates, viewVerifiedColleges, viewUnVerifiedColleges, singleCollege, singleParticipate, editParticipate, verifyCollege, unVerifyCollege, verifyParticipate, unVerifyParticipate, delCol, delParticipate, delSingleParticipate, selectEvent, countCollege, countParticipate } = require('../controllers/regControllers');
 const router = express.Router();
 
 router.route('/college').post(createCollege);
@@ -18,5 +18,8 @@ router.route('/view/participate/unverify/:id').put(unVerifyParticipate);
 router.route('/delete/college/:id').delete(delCol);
 router.route('/delete/participate/:id').delete(delParticipate);
 router.route('/delete/singleparticipate/:id').delete(delSingleParticipate);
+router.route('/view/selectevent/:event').get(selectEvent);
+router.route('/count/college').get(countCollege);
+router.route('/count/participate').get(countParticipate);
 
 module.exports = router;

@@ -1,9 +1,9 @@
 const dataBaseConnection = require('../database');
 
 exports.createCollege = (req, res) => {
-    const { college_name, email, name, password } = req.body;
-    const collegeInsert = "INSERT INTO college (college_name, email, name, password) VALUES (?, ?, ?, ?)";
-    dataBaseConnection.query(collegeInsert, [college_name, email, name, password], (error, result) => {
+    const { college_name, email, depart, password } = req.body;
+    const collegeInsert = "INSERT INTO college (college_name, email, depart, password) VALUES (?, ?, ?, ?)";
+    dataBaseConnection.query(collegeInsert, [college_name, email, depart, password], (error, result) => {
         if(error){
             console.log(error);
         }
@@ -184,6 +184,37 @@ exports.delSingleParticipate = (req, res) => {
         res.status(201).json({
             success: true,
             message: "Successfully Deleted"
+        })
+    })
+}
+
+exports.selectEvent = (req, res) => {
+    const event = req.params.event;
+    const selectEvent = "SELECT * FROM participates WHERE event1 = ? || event2 = ?";
+    dataBaseConnection.query(selectEvent, [event, event], (error, result) => {
+        res.status(201).json({
+            success: true,
+            selectEvents: result
+        })
+    })
+}
+
+exports.countCollege = (req, res) => {
+    const countCollege = "SELECT COUNT(lot_no) AS cname FROM college";
+    dataBaseConnection.query(countCollege, (error, result) => {
+        res.status(201).json({
+            success: true,
+            count: result
+        })
+    })
+}
+
+exports.countParticipate = (req, res) => {
+    const countParticipate = "SELECT COUNT(id) AS pname FROM participates";
+    dataBaseConnection.query(countParticipate, (error, result) => {
+        res.status(201).json({
+            success: true,
+            count: result
         })
     })
 }
