@@ -130,3 +130,40 @@ exports.reguser = (req, res) => {
         })
     })
 }
+
+exports.partloginuser = (req, res) => {
+    const { email, password } = req.body;
+    const sqlquery = "SELECT * FROM college WHERE email = ?";
+    dataBaseConnection.query(sqlquery, [email], (error, data) => {
+        try{
+            if(data.length == 0){
+                res.json({
+                    status: 400,
+                    message: "user not found",
+                    length: data.length
+                })
+            }else{
+                if(data[0].password == password){
+                    if(data){
+                        const auth = jwt.sign({data:data}, secretkey);
+                        res.json({
+                            status: 200,
+                            message: 'login success',
+                            token: auth
+                        })
+                    }
+                }else{
+                    res.json({
+                        status: 401,
+                        message: "password not match"
+                    })
+                }
+            }
+        } catch(error) {
+            res.json({
+                status: 401,
+                message: "error"
+            })
+        }
+    })
+}

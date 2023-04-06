@@ -5,6 +5,7 @@ const cors = require('cors');
 const reg = require('./routers/reg');
 const admin = require('./routers/admin');
 const auth = require('./routers/auth');
+const staff = require('./routers/staff');
 
 app.use(cors());
 app.use(express.json());
@@ -18,3 +19,4 @@ app.listen(5000, () => {
 app.use('/api/', reg);
 app.use('/api/', admin);
 app.use('/api/', auth);
+app.use('/api/', staff)
